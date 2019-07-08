@@ -1,18 +1,23 @@
 package com.example.swusemiproject2019.fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.swusemiproject2019.R;
+import com.example.swusemiproject2019.activity.CameraCapture2Activity;
+import com.example.swusemiproject2019.activity.LoginActivity;
 import com.example.swusemiproject2019.bean.MemberBean;
 import com.example.swusemiproject2019.db.FileDB;
 
@@ -30,6 +35,9 @@ public class FragmentMember extends Fragment {
         TextView txtMemName = view.findViewById(R.id.txtMemName);
         TextView txtMemPw = view.findViewById(R.id.txtMemPw);
         TextView txtMemDate = view.findViewById(R.id.txtMemDate);
+        Button btnLogout = view.findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(mBtnLogout);
 
         //파일DB 에서 가져온다.
         MemberBean memberBean = FileDB.getLoginMember( getActivity() );
@@ -42,4 +50,12 @@ public class FragmentMember extends Fragment {
 
         return view;
     }
+    private View.OnClickListener mBtnLogout = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent ii = new Intent(getActivity(), LoginActivity.class);
+            startActivity(ii);
+        }
+    };
 }
+
